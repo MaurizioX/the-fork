@@ -1,4 +1,4 @@
-package trip.thefork.ui.main
+package trip.thefork.ui.features.restaurant
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import trip.thefork.R
 
-class MainFragment : Fragment() {
+class RestaurantFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = RestaurantFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: RestaurantViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RestaurantViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
