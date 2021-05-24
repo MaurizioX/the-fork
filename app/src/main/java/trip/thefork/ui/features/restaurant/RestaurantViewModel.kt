@@ -1,14 +1,17 @@
 package trip.thefork.ui.features.restaurant
 
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import trip.thefork.domain.elements.RestaurantElement
 import trip.thefork.domain.usecase.GetRestaurantUseCase
 import trip.thefork.ui.MVIViewModel
 import trip.thefork.ui.data.RestaurantUI
+import javax.inject.Inject
 
-class RestaurantViewModel(
+@HiltViewModel
+class RestaurantViewModel @Inject constructor (
     private val getRestaurantUseCase: GetRestaurantUseCase,
     //TODO this parameter should be injected when user previously select Restaurant
     private val restaurantId: String = "40370"

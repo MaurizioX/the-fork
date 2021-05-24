@@ -14,6 +14,7 @@ import org.junit.*
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.junit.runners.BlockJUnit4ClassRunner
+import trip.thefork.data.services.Failure
 import trip.thefork.domain.elements.RestaurantElement
 import trip.thefork.domain.usecase.GetRestaurantUseCase
 import trip.thefork.ui.data.RestaurantUI
@@ -22,6 +23,7 @@ import trip.thefork.ui.data.RestaurantUI
 class RestaurantViewModelTest {
     companion object {
         private const val NAME01: String = "Name 1"
+        private val FAILURE:Failure = mockk()
     }
 
     private lateinit var someName: String
@@ -61,14 +63,14 @@ class RestaurantViewModelTest {
     fun `check just create view model, when there is an error loading data`() {
         `given a mocked use case`()
         `given a restaurant id`()
-        `given an error responsed for a given restaurant id`()
+        `given an error response for a given restaurant id`()
         `given just create view model `()
 
         `them state is Failed`()
     }
 
-    private fun `given an error responsed for a given restaurant id`() {
-        coEvery { getRestaurantUseCase.action(restaurantId) }.returns("ERROR MESSAGE".left())
+    private fun `given an error response for a given restaurant id`() {
+        coEvery { getRestaurantUseCase.action(restaurantId) }.returns(FAILURE.left())
     }
 
 

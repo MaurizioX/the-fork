@@ -12,6 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.BlockJUnit4ClassRunner
 import trip.thefork.data.entity.RestaurantEntity
+import trip.thefork.data.services.Failure
 import trip.thefork.data.services.RestaurantService
 import trip.thefork.domain.elements.RestaurantElement
 
@@ -21,11 +22,11 @@ class GetRestaurantUseCaseTest {
         private val RESTAURANT_ELEMENT_MOCK: RestaurantElement = mockk()
         private val RESTAURANT_ENTITY_MOCK: RestaurantEntity = mockk()
         private const val RESTAURANT_ID = "restaurant_id"
-        private const val ERROR_RESPONSE = "ERROR"
+        private val ERROR_RESPONSE :Failure = mockk()
     }
 
-    private lateinit var serverResponse: Either<String, RestaurantEntity>
-    private lateinit var result: Either<String, RestaurantElement>
+    private lateinit var serverResponse: Either<Failure, RestaurantEntity>
+    private lateinit var result: Either<Failure, RestaurantElement>
     private lateinit var restaurantId: String
     private lateinit var entityMapper: (RestaurantEntity) -> RestaurantElement
     private lateinit var restaurantService: RestaurantService

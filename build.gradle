@@ -10,6 +10,8 @@ buildscript {
         lifecycle_version = '2.2.0'
         livedata_version = '2.4.0-alpha01'
         arrow_version = "0.13.2"
+        ktor_version = '1.5.4'
+        logback_version = '1.7.30'
     }
 
     repositories {
@@ -19,7 +21,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:1.5.0"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
 
         // NOTE: Do not place your application dependencies here; they belong
