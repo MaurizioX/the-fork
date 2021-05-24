@@ -10,6 +10,7 @@ import trip.thefork.ui.data.RestaurantUI
 
 class RestaurantViewModel(
     private val getRestaurantUseCase: GetRestaurantUseCase,
+    //TODO this parameter should be injected when user previously select Restaurant
     private val restaurantId: String = "40370"
 ) :
     MVIViewModel<RestaurantViewModel.RestaurantAction, RestaurantViewModel.RestaurantState>() {
