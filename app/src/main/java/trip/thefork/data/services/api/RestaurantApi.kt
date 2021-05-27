@@ -5,11 +5,12 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 import trip.thefork.data.entity.RestaurantEntity
+import trip.thefork.data.entity.json.RestaurantInfoJson
 
 class RestaurantApi constructor(private val client: HttpClient) {
     suspend fun getRestaurantKtor(
         restaurantId: String
-    ): RestaurantEntity = client.get(URLBuilder().apply {
+    ): RestaurantInfoJson = client.get(URLBuilder().apply {
         protocol = URLProtocol.HTTP
         host = "api.lafourchette.com"
         encodedPath = "api"

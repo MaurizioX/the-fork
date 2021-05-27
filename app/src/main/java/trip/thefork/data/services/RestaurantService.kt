@@ -1,8 +1,12 @@
 package trip.thefork.data.services
 
 import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
 import io.ktor.client.features.*
+import trip.thefork.data.entity.GpsLoc
 import trip.thefork.data.entity.RestaurantEntity
+import trip.thefork.data.entity.json.RestaurantInfoJson
 import trip.thefork.data.services.api.RestaurantApi
 import trip.thefork.data.services.infra.NetworkHandler
 
@@ -13,35 +17,43 @@ interface RestaurantService {
 
 class InfraRestaurantService(
     private val networkHandler: NetworkHandler,
-    private val restaurantApi: RestaurantApi
+    private val restaurantApi: RestaurantApi,
+    private val jsonMapper: (RestaurantInfoJson) -> RestaurantEntity = mapper,
+    private val errorMap: (Exception) -> Failure = errorMapper
 ) : RestaurantService {
     override suspend fun getRestaurantInfo(restaurantId: String): Either<Failure, RestaurantEntity> =
-        when (networkHandler.isNetworkAvailable()) {
-            true -> {
-                try {
-                    Either.Right(restaurantApi.getRestaurantKtor(restaurantId).toDomain())
-                } catch (e: Exception) {
-                    Either.Left(e.toCustomExceptions())
-                }
+        if (networkHandler.isNetworkAvailable())
+            try {
+                jsonMapper(restaurantApi.getRestaurantKtor(restaurantId)).right()
+            } catch (e: Exception) {
+                errorMap(e).left()
             }
-            else -> Either.Left(Failure.NetworkConnection)
-        }
+        else Failure.NetworkConnection.left()
 }
 
-private fun RestaurantEntity.toDomain(): RestaurantEntity {
-    TODO("Not yet implemented")
+private val mapper: (RestaurantInfoJson) -> RestaurantEntity = { restaurantInfo ->
+    restaurantInfo.data.let { dataJson ->
+        RestaurantEntity(
+            name = dataJson.name,
+            location = GpsLoc(dataJson.gpsLat, dataJson.gpsLong),
+            dataJson.avgRateEvolution,
+            diaporamaList = emptyList()
+        )
+    }
 }
 
-fun Exception.toCustomExceptions() = when (this) {
-    is ServerResponseException -> Failure.HttpErrorInternalServerError(this)
-    is ClientRequestException ->
-        when (this.response.status.value) {
-            400 -> Failure.HttpErrorBadRequest(this)
-            401 -> Failure.HttpErrorUnauthorized(this)
-            403 -> Failure.HttpErrorForbidden(this)
-            404 -> Failure.HttpErrorNotFound(this)
-            else -> Failure.HttpError(this)
-        }
-    is RedirectResponseException -> Failure.RedirectError(this)
-    else -> Failure.GenericError(this)
+private val errorMapper: (Exception) -> Failure = {
+    when (it) {
+        is ServerResponseException -> Failure.HttpErrorInternalServerError(it)
+        is ClientRequestException ->
+            when (it.response.status.value) {
+                400 -> Failure.HttpErrorBadRequest(it)
+                401 -> Failure.HttpErrorUnauthorized(it)
+                403 -> Failure.HttpErrorForbidden(it)
+                404 -> Failure.HttpErrorNotFound(it)
+                else -> Failure.HttpError(it)
+            }
+        is RedirectResponseException -> Failure.RedirectError(it)
+        else -> Failure.GenericError(it)
+    }
 }

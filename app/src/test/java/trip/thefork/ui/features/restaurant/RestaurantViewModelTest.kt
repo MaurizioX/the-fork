@@ -24,6 +24,7 @@ class RestaurantViewModelTest {
     companion object {
         private const val NAME01: String = "Name 1"
         private val FAILURE:Failure = mockk()
+        private val DIAPORAMA_LIST = mockk<List<String>>()
     }
 
     private lateinit var someName: String
@@ -78,6 +79,7 @@ class RestaurantViewModelTest {
         restaurantElement = mockk()
         someName = NAME01
         every { restaurantElement.name }.returns(someName)
+        every { restaurantElement.diaporamaList }.returns(DIAPORAMA_LIST)
         coEvery { getRestaurantUseCase.action(restaurantId) }.returns(restaurantElement.right())
     }
 
@@ -94,14 +96,13 @@ class RestaurantViewModelTest {
             viewModel.state.value,
             RestaurantViewModel.RestaurantState.Failed
         )
-
     }
 
     private fun `them state is loading`() {
         Assert.assertEquals(
             "",
             viewModel.state.value,
-            RestaurantViewModel.RestaurantState.Loaded(RestaurantUI(NAME01))
+            RestaurantViewModel.RestaurantState.Loaded(RestaurantUI(NAME01, DIAPORAMA_LIST))
         )
     }
 

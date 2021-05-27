@@ -1,3 +1,3 @@
 package trip.thefork.domain.elements
 
-data class RestaurantElement (val name:String)
+data class RestaurantElement (val name:String, val diaporamaList: List<String>)

@@ -10,8 +10,11 @@ import trip.thefork.ui.MVIViewModel
 import trip.thefork.ui.data.RestaurantUI
 import javax.inject.Inject
 
+typealias MVIRestaurant = MVIViewModel<RestaurantViewModel.RestaurantAction,
+        RestaurantViewModel.RestaurantState>
+
 @HiltViewModel
-class RestaurantViewModel @Inject constructor (
+class RestaurantViewModel @Inject constructor(
     private val getRestaurantUseCase: GetRestaurantUseCase,
     //TODO this parameter should be injected when user previously select Restaurant
     private val restaurantId: String = "40370"
@@ -40,4 +43,5 @@ class RestaurantViewModel @Inject constructor (
     }
 }
 
-private fun RestaurantElement.toRestaurantUI(): RestaurantUI = RestaurantUI(name = name)
+private fun RestaurantElement.toRestaurantUI(): RestaurantUI =
+    RestaurantUI(name = name, diaporamaList = diaporamaList)
