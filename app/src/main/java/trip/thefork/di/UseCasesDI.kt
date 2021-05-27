@@ -19,11 +19,9 @@ class UseCasesDI {
     ) = GetRestaurantUseCase(restaurantService, RestaurantMapper)
 
     @Provides
-    fun providesRestaurantId(): String = "6861"
+    fun providesRestaurantId(): String = "14163"
 }
 
 object RestaurantMapper:(RestaurantEntity) -> RestaurantElement{
-    override fun invoke(entity: RestaurantEntity): RestaurantElement {
-        TODO("Not yet implemented")
-    }
+    override fun invoke(entity: RestaurantEntity): RestaurantElement = RestaurantElement(entity.name,entity.diaporamaList)
 }

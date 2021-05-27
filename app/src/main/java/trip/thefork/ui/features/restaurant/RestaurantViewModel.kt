@@ -7,7 +7,9 @@ import kotlinx.coroutines.launch
 import trip.thefork.domain.elements.RestaurantElement
 import trip.thefork.domain.usecase.GetRestaurantUseCase
 import trip.thefork.ui.MVIViewModel
+import trip.thefork.ui.data.RestaurantElementUi
 import trip.thefork.ui.data.RestaurantUI
+import trip.thefork.ui.data.TitleUi
 import javax.inject.Inject
 
 typealias MVIRestaurant = MVIViewModel<RestaurantViewModel.RestaurantAction,
@@ -17,7 +19,7 @@ typealias MVIRestaurant = MVIViewModel<RestaurantViewModel.RestaurantAction,
 class RestaurantViewModel @Inject constructor(
     private val getRestaurantUseCase: GetRestaurantUseCase,
     //TODO this parameter should be injected when user previously select Restaurant
-    private val restaurantId: String = "40370"
+    private val restaurantId: String = "14163"
 ) :
     MVIViewModel<RestaurantViewModel.RestaurantAction, RestaurantViewModel.RestaurantState>() {
     private val _state = MutableStateFlow<RestaurantState>(RestaurantState.Loading)
@@ -27,14 +29,25 @@ class RestaurantViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value =
                 getRestaurantUseCase.action(restaurantId)
-                    .fold({ RestaurantState.Failed }) { RestaurantState.Loaded(it.toRestaurantUI()) }
+                    .fold({ RestaurantState.Failed }) {element ->
+                        var count = 60
+
+                        val sequence = generateSequence {
+                            (count--).takeIf { it > 0 } // will return null, when value becomes non-positive,
+                            // and that will terminate the sequence
+                        }
+
+                        RestaurantState.Loaded(element.toRestaurantUI(),restaurantElementUi = sequence.toList().map { TitleUi("Title number $it") })
+                    }
         }
     }
 
     sealed interface RestaurantAction : Action {}
     sealed interface RestaurantState : State {
         object Loading : RestaurantState
-        data class Loaded(val restaurant: RestaurantUI) : RestaurantState
+        data class Loaded(val restaurant: RestaurantUI,
+        val restaurantElementUi: List<RestaurantElementUi>
+        ) : RestaurantState
         object Failed : RestaurantState
     }
 

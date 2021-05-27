@@ -4,7 +4,11 @@ import android.view.ViewGroup
 import trip.thefork.ui.data.RestaurantElementUi
 import trip.thefork.ui.features.restaurant.RestaurantElementUiVH
 
-interface RestaurantVHDelegate<I:RestaurantElementUi,VH: RestaurantElementUiVH> {
+interface RestaurantVHDelegate<I : RestaurantElementUi, VH : RestaurantElementUiVH> {
     fun createViewHolder(parent: ViewGroup): VH
-    fun bindViewHolder(holder: VH, item: I)
+    fun bindViewHolder(holder: VH, item: I) {
+        holder.bind(item)
+    }
+
+    val viewType: Int
 }
