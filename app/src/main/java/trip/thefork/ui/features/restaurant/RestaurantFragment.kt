@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-import trip.thefork.R
+import trip.thefork.databinding.MainFragmentBinding
 
 
 @AndroidEntryPoint
@@ -25,13 +25,13 @@ class RestaurantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View = MainFragmentBinding.inflate(inflater, container, false).apply {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state ->
                 Timber.i("current state $state")
-
             }
+            recyclerList.adapter = RestaurantAdapter()
         }
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    }.root
+
 }

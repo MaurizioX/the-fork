@@ -1,8 +1,9 @@
-package trip.thefork
+package trip.thefork.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
+import trip.thefork.R
 import trip.thefork.ui.features.restaurant.RestaurantFragment
 
 @AndroidEntryPoint

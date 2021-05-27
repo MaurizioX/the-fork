@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheFork</string>
+    <string name="content_description_media">Restaurant Image</string>
 </resources>
