@@ -1,2 +1,4 @@
 rootProject.name = "TheFork"
 include ':app'
+include ':constraintlayout'
+include ':core'

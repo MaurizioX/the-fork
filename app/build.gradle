@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 
+
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -77,14 +78,13 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation project(path: ':constraintlayout')
 
 //    implementation "io.ktor:ktor-client-core:$ktor_version"
     implementation "io.ktor:ktor-client-android:$ktor_version"
 //    implementation "io.ktor:ktor-client-apache:$ktor_version"
     implementation "io.ktor:ktor-client-serialization:$ktor_version"
     implementation "io.ktor:ktor-client-logging:$ktor_version"
-//    implementation "ch.qos.logback:logback-classic:$logback_version"
-//    implementation "io.ktor:ktor-server-core:1.5.4"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "io.mockk:mockk:1.10.0"

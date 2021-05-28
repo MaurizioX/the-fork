@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
+import trip.thefork.databinding.ActivityMain2Binding
 import trip.thefork.databinding.MainFragmentBinding
+import trip.thefork.ui.main.MainActivity
 
 
 @AndroidEntryPoint
@@ -27,7 +29,7 @@ class RestaurantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = MainFragmentBinding.inflate(inflater, container, false).apply {
+    ): View = ActivityMain2Binding.inflate(inflater, container, false).apply {
         recyclerList.layoutManager = LinearLayoutManager(context)
         recyclerList.adapter = restaurantAdapter
         lifecycleScope.launchWhenStarted {
