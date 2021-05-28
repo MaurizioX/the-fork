@@ -16,12 +16,21 @@ class UseCasesDI {
     fun providesGetRestaurantUseCase(
         restaurantService: RestaurantService,
 
-    ) = GetRestaurantUseCase(restaurantService, RestaurantMapper)
+        ) = GetRestaurantUseCase(restaurantService, RestaurantMapper)
 
     @Provides
     fun providesRestaurantId(): String = "14163"
 }
 
-object RestaurantMapper:(RestaurantEntity) -> RestaurantElement{
-    override fun invoke(entity: RestaurantEntity): RestaurantElement = RestaurantElement(entity.name,entity.diaporamaList)
+object RestaurantMapper : (RestaurantEntity) -> RestaurantElement {
+    override fun invoke(entity: RestaurantEntity): RestaurantElement = RestaurantElement(
+        entity.name,
+        entity.diaporamaList,
+        entity.menus,
+        entity.description,
+        entity.hourOpen,
+        entity.cardsStart,
+        entity.cardsMain,
+        entity.cardsDessert
+    )
 }

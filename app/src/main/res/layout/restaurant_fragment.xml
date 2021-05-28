@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="@dimen/elevation_default_top_app_bar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/image_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+<!--                <androidx.constraintlayout.motion.widget.MotionLayout-->
+<!--                    android:id="@+id/motionLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:layoutDescription="@xml/demo_010_carousel_scene">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView0"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_baseline_cloud_download_50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/imageView1"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView1"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_baseline_cloud_download_50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/imageView2"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView2"-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_baseline_cloud_download_50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView3"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_baseline_cloud_download_50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageView2"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView4"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_baseline_cloud_download_50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageView3"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.Guideline-->
+<!--                        android:id="@+id/guideline"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintGuide_begin="50dp" />-->
+
+<!--                    <androidx.constraintlayout.widget.Guideline-->
+<!--                        android:id="@+id/guideline2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintGuide_end="50dp" />-->
+
+<!--                    <androidx.constraintlayout.helper.widget.Carousel-->
+<!--                        android:id="@+id/carousel"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:carousel_backwardTransition="@+id/backward"-->
+<!--                        app:carousel_firstView="@+id/imageView2"-->
+<!--                        app:carousel_forwardTransition="@+id/forward"-->
+<!--                        app:carousel_infinite="true"-->
+<!--                        app:carousel_nextState="@+id/next"-->
+<!--                        app:carousel_previousState="@+id/previous"-->
+<!--                        app:constraint_referenced_ids="imageView0,imageView1,imageView2,imageView3,imageView4"-->
+<!--                         />-->
+<!--                    -->
+
+
+<!--                </androidx.constraintlayout.motion.widget.MotionLayout>-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/keyline_4"
+                    android:layout_marginEnd="@dimen/keyline_4"
+                    android:orientation="vertical">
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal"-->
+                    <!--                        android:paddingTop="42dp">-->
+
+                    <!--                        <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_gravity="center_vertical"-->
+                    <!--                            app:srcCompat="@drawable/ic_material_icon_24dp" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_gravity="center_vertical"-->
+                    <!--                            android:layout_marginStart="@dimen/keyline_2"-->
+                    <!--                            android:layout_marginEnd="@dimen/keyline_4"-->
+                    <!--                            android:gravity="center_vertical"-->
+                    <!--                            android:text="@string/app_name"-->
+                    <!--                            android:textAppearance="?textAppearanceHeadline6"-->
+                    <!--                            android:textColor="@color/material_on_surface_emphasis_high_type"-->
+                    <!--                            android:textStyle="bold"-->
+                    <!--                             />-->
+                    <!--&lt;!&ndash;                        app:fontFamily="@font/roboto_black_italic"&ndash;&gt;-->
+
+                    <!--                    </LinearLayout>-->
+
+                </LinearLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@color/black"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center|start"
+                tools:text="Restaurant name" />
+
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

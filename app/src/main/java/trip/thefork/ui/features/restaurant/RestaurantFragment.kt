@@ -10,10 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
-import trip.thefork.databinding.ActivityMain2Binding
-import trip.thefork.databinding.MainFragmentBinding
-import trip.thefork.ui.main.MainActivity
+import trip.thefork.databinding.RestaurantFragmentBinding
 
 
 @AndroidEntryPoint
@@ -29,17 +26,44 @@ class RestaurantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = ActivityMain2Binding.inflate(inflater, container, false).apply {
+    ): View = RestaurantFragmentBinding.inflate(inflater, container, false).apply {
         recyclerList.layoutManager = LinearLayoutManager(context)
         recyclerList.adapter = restaurantAdapter
+        imagePager.orientation = androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
+
+
+
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state ->
-                Timber.i("current state $state")
-                if (state is RestaurantViewModel.RestaurantState.Loaded)
+                if (state is RestaurantViewModel.RestaurantState.Loaded) {
                     restaurantAdapter.submitList(state.restaurantElementUi)
+                    imagePager.adapter = ImageAdapter(state.restaurant.diaporamaList)
+//                    configureCarusel(state)
+                    name.text = state.restaurant.name
+                }
             }
-
         }
     }.root
+
+    private fun  RestaurantFragmentBinding.configureCarusel(
+        state: RestaurantViewModel.RestaurantState.Loaded
+    ) {
+        state.restaurant.diaporamaList.let { imageList ->
+//            carousel.setAdapter(object : Carousel.Adapter {
+//                override fun count(): Int {
+//                    return imageList.size
+//                }
+//
+//                override fun populate(view: View, index: Int) {
+//                    if (view is ImageView) {
+//                        Picasso.with(context).load(imageList[index]).into(view)
+//                    }
+//                }
+//
+//                override fun onNewItem(index: Int) {
+//                }
+//            })
+        }
+    }
 
 }

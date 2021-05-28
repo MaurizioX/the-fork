@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import trip.thefork.ui.data.RestaurantElementUi
+import trip.thefork.ui.features.restaurant.delegate.DescriptionDelegate
 import trip.thefork.ui.features.restaurant.delegate.RestaurantVHDelegate
 import trip.thefork.ui.features.restaurant.delegate.TitleDelegate
 
@@ -15,6 +16,7 @@ class RestaurantAdapter : ListAdapter<RestaurantElementUi, RestaurantElementUiVH
     private val delegates =
         SparseArray<RestaurantVHDelegate<RestaurantElementUi, RestaurantElementUiVH>>().apply {
             appendDelegate(TitleDelegate as RestaurantVHDelegate<RestaurantElementUi, RestaurantElementUiVH>)
+            appendDelegate(DescriptionDelegate as RestaurantVHDelegate<RestaurantElementUi, RestaurantElementUiVH>)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantElementUiVH =

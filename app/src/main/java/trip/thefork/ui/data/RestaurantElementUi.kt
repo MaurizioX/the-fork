@@ -12,3 +12,11 @@ data class TitleUi(val name: String) : RestaurantElementUi {
     override val type: Int
         get() = TYPE
 }
+
+data class DescriptionUI(val info: String, val detailInfo: String) : RestaurantElementUi {
+    companion object {
+        const val TYPE = 2
+    }
+    override val type: Int
+        get() = TYPE
+}

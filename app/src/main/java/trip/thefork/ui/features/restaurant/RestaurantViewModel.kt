@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import trip.thefork.domain.elements.RestaurantElement
 import trip.thefork.domain.usecase.GetRestaurantUseCase
 import trip.thefork.ui.MVIViewModel
+import trip.thefork.ui.data.DescriptionUI
 import trip.thefork.ui.data.RestaurantElementUi
 import trip.thefork.ui.data.RestaurantUI
 import trip.thefork.ui.data.TitleUi
@@ -29,7 +30,7 @@ class RestaurantViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value =
                 getRestaurantUseCase.action(restaurantId)
-                    .fold({ RestaurantState.Failed }) {element ->
+                    .fold({ RestaurantState.Failed }) { element ->
                         var count = 60
 
                         val sequence = generateSequence {
@@ -37,7 +38,36 @@ class RestaurantViewModel @Inject constructor(
                             // and that will terminate the sequence
                         }
 
-                        RestaurantState.Loaded(element.toRestaurantUI(),restaurantElementUi = sequence.toList().map { TitleUi("Title number $it") })
+                        val items = mutableListOf<RestaurantElementUi>().apply {
+
+                            add(TitleUi("Start"))
+                            addAll(element.cardsStart.map {
+                                DescriptionUI(
+                                    it.description,
+                                    it.price.toString()
+                                )
+                            })
+                            add(TitleUi("Main"))
+                            addAll(element.cardsMain.map {
+                                DescriptionUI(
+                                    it.description,
+                                    it.price.toString()
+                                )
+                            })
+                            add(TitleUi("Desert"))
+                            addAll(element.cardsDessert.map {
+                                DescriptionUI(
+                                    it.description,
+                                    it.price.toString()
+                                )
+                            })
+                        }
+
+
+                        RestaurantState.Loaded(
+                            element.toRestaurantUI(),
+                            restaurantElementUi = items
+                        )
                     }
         }
     }
@@ -45,9 +75,11 @@ class RestaurantViewModel @Inject constructor(
     sealed interface RestaurantAction : Action {}
     sealed interface RestaurantState : State {
         object Loading : RestaurantState
-        data class Loaded(val restaurant: RestaurantUI,
-        val restaurantElementUi: List<RestaurantElementUi>
+        data class Loaded(
+            val restaurant: RestaurantUI,
+            val restaurantElementUi: List<RestaurantElementUi>
         ) : RestaurantState
+
         object Failed : RestaurantState
     }
 

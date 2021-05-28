@@ -2,7 +2,9 @@ package trip.thefork.ui.features.restaurant.delegate
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import trip.thefork.databinding.DescriptionUiItemBinding
 import trip.thefork.databinding.TitleUiItemBinding
+import trip.thefork.ui.data.DescriptionUI
 import trip.thefork.ui.data.RestaurantElementUi
 import trip.thefork.ui.data.TitleUi
 import trip.thefork.ui.features.restaurant.RestaurantElementUiVH
@@ -26,11 +28,22 @@ class TitleUiVH(private val binding: TitleUiItemBinding) : RestaurantElementUiVH
          }
 
     }
-
 }
-//private inline fun  <reified T> checkType(item: RestaurantElementUi):T? = if (item == T::class)
-//    item as T
-//else
-//    null
 
+object DescriptionDelegate : RestaurantVHDelegate<DescriptionUI, DescriptionUIVH>{
+    override fun createViewHolder(parent: ViewGroup): DescriptionUIVH = DescriptionUIVH(
+        DescriptionUiItemBinding.inflate(parent.inflater, parent, false))
 
+    override val viewType: Int
+        get() = DescriptionUI.TYPE
+}
+
+class DescriptionUIVH(private val binding: DescriptionUiItemBinding) : RestaurantElementUiVH(binding.root) {
+    override fun bind(item: RestaurantElementUi) {
+        if (item is DescriptionUI) {
+            binding.description = item
+            binding.executePendingBindings()
+        }
+
+    }
+}

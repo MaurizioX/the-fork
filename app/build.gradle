@@ -80,11 +80,11 @@ dependencies {
     implementation "io.arrow-kt:arrow-core:$arrow_version"
     implementation project(path: ':constraintlayout')
 
-//    implementation "io.ktor:ktor-client-core:$ktor_version"
     implementation "io.ktor:ktor-client-android:$ktor_version"
-//    implementation "io.ktor:ktor-client-apache:$ktor_version"
     implementation "io.ktor:ktor-client-serialization:$ktor_version"
     implementation "io.ktor:ktor-client-logging:$ktor_version"
+
+    implementation 'com.squareup.picasso:picasso:2.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "io.mockk:mockk:1.10.0"

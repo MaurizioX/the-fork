@@ -4,6 +4,7 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import io.ktor.client.features.*
+import trip.thefork.data.entity.Card
 import trip.thefork.data.entity.GpsLoc
 import trip.thefork.data.entity.RestaurantEntity
 import trip.thefork.data.entity.json.RestaurantInfoJson
@@ -37,7 +38,26 @@ private val mapper: (RestaurantInfoJson) -> RestaurantEntity = { restaurantInfo 
             name = dataJson.name,
             location = GpsLoc(dataJson.gpsLat, dataJson.gpsLong),
             dataJson.avgRateEvolution,
-            diaporamaList = emptyList()
+            diaporamaList = dataJson.picsDiaporama.map { it.x135 },
+            menus = dataJson.menus,
+            description = dataJson.description,
+            hourOpen = dataJson.hourOpen,
+            cardsStart = listOf<Card>(
+                Card(dataJson.cardStart1, dataJson.priceCardStart1),
+                Card(dataJson.cardStart2, dataJson.priceCardStart2),
+                Card(dataJson.cardStart3, dataJson.priceCardStart3)
+            ),
+            cardsMain = listOf<Card>(
+                Card(dataJson.cardMain1, dataJson.priceCardMain1),
+                Card(dataJson.cardMain2, dataJson.priceCardMain2),
+                Card(dataJson.cardMain3, dataJson.priceCardMain3)
+            ),
+            cardsDessert = listOf<Card>(
+                Card(dataJson.cardDessert1, dataJson.priceCardDessert1.toDouble()),
+                Card(dataJson.cardDessert2 ,dataJson.priceCardDessert2),
+                Card(dataJson.cardDessert3, dataJson.priceCardDessert3)
+            )
+
         )
     }
 }
