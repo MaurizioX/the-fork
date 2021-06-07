@@ -38,32 +38,12 @@ class RestaurantFragment : Fragment() {
                 if (state is RestaurantViewModel.RestaurantState.Loaded) {
                     restaurantAdapter.submitList(state.restaurantElementUi)
                     imagePager.adapter = ImageAdapter(state.restaurant.diaporamaList)
-//                    configureCarusel(state)
                     name.text = state.restaurant.name
                 }
             }
         }
     }.root
 
-    private fun  RestaurantFragmentBinding.configureCarusel(
-        state: RestaurantViewModel.RestaurantState.Loaded
-    ) {
-        state.restaurant.diaporamaList.let { imageList ->
-//            carousel.setAdapter(object : Carousel.Adapter {
-//                override fun count(): Int {
-//                    return imageList.size
-//                }
-//
-//                override fun populate(view: View, index: Int) {
-//                    if (view is ImageView) {
-//                        Picasso.with(context).load(imageList[index]).into(view)
-//                    }
-//                }
-//
-//                override fun onNewItem(index: Int) {
-//                }
-//            })
-        }
-    }
 
 }
+

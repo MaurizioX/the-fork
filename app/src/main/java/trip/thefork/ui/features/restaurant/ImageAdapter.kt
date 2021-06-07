@@ -22,6 +22,4 @@ class ImageAdapter(private val list: List<String>) : RecyclerView.Adapter<ImageV
 
 }
 
-class ImageVH(val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-}
+class ImageVH(val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root)

@@ -2,4 +2,8 @@
     <string name="app_name">TheFork</string>
     <string name="content_description_media">Restaurant Image</string>
     <string name="theme_name_hint">just a hint name</string>
+    <string name="start">Start</string>
+    <string name="main">Main</string>
+    <string name="desert">Desert</string>
+    <string name="reserve">RESERVE - 20%</string>
 </resources>

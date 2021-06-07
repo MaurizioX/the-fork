@@ -1,5 +1,7 @@
 package trip.thefork.ui.data
 
+import trip.thefork.ui.MVIViewModel
+
 sealed interface RestaurantElementUi {
     val type: Int
 }
@@ -17,6 +19,16 @@ data class DescriptionUI(val info: String, val detailInfo: String) : RestaurantE
     companion object {
         const val TYPE = 2
     }
+
+    override val type: Int
+        get() = TYPE
+}
+
+data class ButtonUI(val action: MVIViewModel.Action) : RestaurantElementUi {
+    companion object {
+        const val TYPE = 3
+    }
+
     override val type: Int
         get() = TYPE
 }
