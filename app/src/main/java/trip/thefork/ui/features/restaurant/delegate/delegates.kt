@@ -52,7 +52,8 @@ class DescriptionUIVH(private val binding: DescriptionUiItemBinding) :
     }
 }
 
-object ButtonDelegate : RestaurantVHDelegate<ButtonUI, ButtonUIVH> {
+object ButtonDelegate : RestaurantVHDelegate<ButtonUI<
+        RestaurantViewModel.RestaurantAction,RestaurantViewModel.RestaurantState>, ButtonUIVH> {
     override fun createViewHolder(parent: ViewGroup) = ButtonUIVH(
         ButtonUiItemBinding.inflate(parent.inflater, parent, false)
     )
@@ -63,8 +64,10 @@ object ButtonDelegate : RestaurantVHDelegate<ButtonUI, ButtonUIVH> {
 
 class ButtonUIVH(private val binding: ButtonUiItemBinding) : RestaurantElementUiVH(binding.root) {
     override fun bind(item: RestaurantElementUi) {
-        if (item is ButtonUI) {
+        if (item is ButtonUI<*,*>) {
             binding.action = RestaurantViewModel.RestaurantAction.CreateReserve
+            binding.viewModel = item.viewModel
+
             binding.executePendingBindings()
         }
     }

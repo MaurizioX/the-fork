@@ -24,7 +24,10 @@ data class DescriptionUI(val info: String, val detailInfo: String) : RestaurantE
         get() = TYPE
 }
 
-data class ButtonUI(val action: MVIViewModel.Action) : RestaurantElementUi {
+data class ButtonUI<A : MVIViewModel.Action, S : MVIViewModel.State>(
+    val action: A,
+    val viewModel: MVIViewModel<A, S>
+) : RestaurantElementUi {
     companion object {
         const val TYPE = 3
     }

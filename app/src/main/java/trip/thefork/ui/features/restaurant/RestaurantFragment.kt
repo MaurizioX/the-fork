@@ -31,8 +31,6 @@ class RestaurantFragment : Fragment() {
         recyclerList.adapter = restaurantAdapter
         imagePager.orientation = androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 
-
-
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state ->
                 if (state is RestaurantViewModel.RestaurantState.Loaded) {
@@ -43,7 +41,5 @@ class RestaurantFragment : Fragment() {
             }
         }
     }.root
-
-
 }
 

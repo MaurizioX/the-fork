@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="trip.thefork.ui.features.restaurant.RestaurantViewModel" />
+            type="trip.thefork.ui.MVIViewModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

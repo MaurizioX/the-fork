@@ -68,7 +68,7 @@ class RestaurantViewModel @Inject constructor(
                 )
             })
 
-            add(ButtonUI(RestaurantAction.CreateReserve))
+            add(ButtonUI(RestaurantAction.CreateReserve, this@RestaurantViewModel))
         }
 
 
