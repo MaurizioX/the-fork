@@ -28,15 +28,15 @@ val ktorHttpClient = HttpClient(Android) {
         }
     }
 
-//    install(Logging) {
-//        logger = object : Logger xż`{
-//            override fun log(message: String) {
-//                Timber.v("Logger Ktor => $message")
-//            }
-//
-//        }
-//        level = LogLevel.ALL
-//    }
+    install(Logging) {
+        logger = object : Logger {
+            override fun log(message: String) {
+                Timber.v("Logger Ktor => $message")
+            }
+
+        }
+        level = LogLevel.ALL
+    }
 
     install(ResponseObserver) {
         onResponse { response ->
